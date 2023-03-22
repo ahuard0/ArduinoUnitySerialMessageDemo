@@ -40,13 +40,15 @@ void loop() {
     // get the new byte:
     char inChar = (char)Serial.read();
     // add it to the inputString:
-    inputString += inChar;
+    if (inChar != -1)
+      inputString += inChar;
     // if the incoming character is a newline, set a flag so the main loop can
     // do something about it:
     if (inChar == '\n') {
       stringComplete = true;
       Serial.flush();
     }
+    delay(5);
   }
 
   if (stringComplete) {  // Called when a command is received

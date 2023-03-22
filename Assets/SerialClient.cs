@@ -14,19 +14,21 @@ namespace Huard.Serial
         private string _messageRecieved;
         private string _messageSend;
         static SerialPort _serialPort;
+        public bool readBroadcast = false;
 
         public TextMeshPro status;
 
         void Start()
         {
             _serialPort = new SerialPort("COM10", 9600, Parity.None, dataBits: 8, StopBits.One);
-            _serialPort.ReadTimeout = 5000;
-            _serialPort.WriteTimeout = 5000;
+            _serialPort.ReadTimeout = 200;
+            _serialPort.WriteTimeout = 200;
         }
 
         void Update()
         {
-            //readMessage();
+            if (readBroadcast)
+                readMessage();
         }
 
         public void updateStatus(string msg)
@@ -78,6 +80,7 @@ namespace Huard.Serial
             {
                 if (!_serialPort.IsOpen)
                     _serialPort.Open();
+
                 _messageRecieved = _serialPort.ReadLine();
                 Debug.Log(_messageRecieved);
                 _serialPort.Close();
