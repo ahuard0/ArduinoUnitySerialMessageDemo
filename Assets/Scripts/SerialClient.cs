@@ -20,7 +20,7 @@ namespace Huard.Serial
 
         void Start()
         {
-            _serialPort = new SerialPort("COM10", 9600, Parity.None, dataBits: 8, StopBits.One);
+            _serialPort = new SerialPort("COM8", 9600, Parity.None, dataBits: 8, StopBits.One);
             _serialPort.ReadTimeout = 200;
             _serialPort.WriteTimeout = 200;
         }
